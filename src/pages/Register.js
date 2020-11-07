@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Button } from 'antd'
 import styled from 'styled-components'
 import { useStores } from '../stores'
+import { useHistory } from 'react-router-dom';
 
 const Border = styled.div`
 margin:30px auto;
@@ -32,13 +33,12 @@ const tailLayout = {
 
 const Register = () => {
   const { authStore } = useStores()
-
+  const history=useHistory()
   const onFinish = values => {
     console.log('Success:', values);
     authStore.setUsername(values.username)
     authStore.setPassword(values.password)
-    authStore.register()
-      
+    authStore.register().then(() => {history.push('/')}).catch(() => {console.log('注册失败')})
   };
 
   const onFinishFailed = errorInfo => {
