@@ -4,6 +4,7 @@ import { observer } from 'mobx-react'
 import { Upload, message, Spin, Typography, Button } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import styled from 'styled-components'
+var FileSaver = require('file-saver');
 
 const { Dragger } = Upload;
 const { Text } = Typography;
@@ -41,6 +42,9 @@ const Component = observer(() => {
     },
     showUploadList: false
   }
+  const download=()=>{
+    FileSaver.saveAs(fileStore.serverFile.attributes.url.attributes.url, fileStore.filename);
+  }
 
   return (
     <div>
@@ -54,7 +58,6 @@ const Component = observer(() => {
         </Dragger>
       </Spin>
       <div>
-        {/* 调试用window.stores.serverFile找url路径 */}
         {
           fileStore.serverFile ? <Border>
             <h2 style={{ textAlign: 'center' }}>{fileStore.filename}</h2>
@@ -67,7 +70,7 @@ const Component = observer(() => {
               <br />
               <dd>
                 <Button style={{ marginRight: '20px' }}><a target='_blank' href={fileStore.serverFile.attributes.url.attributes.url} >预览</a></Button>
-                <Button> <a download={fileStore.filename} href={fileStore.serverFile.attributes.url.attributes.url} >下载</a></Button>
+                <Button onClick={download}>下载</Button>
               </dd>
             </dl>
           </Border> : null
