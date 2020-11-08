@@ -74,7 +74,7 @@ const Component = observer(() => {
               <br />
               <dd>
                 <Button style={{ marginRight: '20px' }}><a target='_blank' href={fileStore.serverFile.attributes.url.attributes.url} >预览</a></Button>
-                <Button onClick={download}>下载</Button>
+                <Button onClick={()=>{download()}}>下载</Button>
               </dd>
             </dl>
           </Border> : null

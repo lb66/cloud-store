@@ -2,6 +2,8 @@ import { observable, action } from 'mobx';
 import { Auth } from '../models'
 import { message } from 'antd';
 import { userStore } from './user'
+import { fileStore } from './file';
+import { myUploadStore } from './myUpload';
 
 class AuthStore {
   @observable values = {
@@ -48,6 +50,8 @@ class AuthStore {
   @action logout() {
     Auth.logout()
     userStore.reset()
+    fileStore.reset()
+    myUploadStore.reset()
   }
 }
 const authStore = new AuthStore()

@@ -39,10 +39,21 @@ const Uploader = {
       item.save().then(serverFile => resolve(serverFile), error => reject(error))
     })
   },
+  find({ page, limit }) {
+    const query = new Query("Files")
+    query.include('owner')
+    query.limit(limit)
+    query.skip(page * limit)
+    query.equalTo('owner', User.current())
+    query.descending('createdAt');
+    return new Promise((resolve, reject) => {
+      query.find().then(result => resolve(result), error => reject(error))
+    })
+  },
   delete(objectId) {
     const item = AV.Object.createWithoutData('Files', objectId);
     item.destroy();
   }
 }
-
+window.Uploader = Uploader
 export { Auth, Uploader }
