@@ -11,7 +11,7 @@ const Home = observer(() => {
   return (
     <>
       {
-        userStore.currentUser ? <>Hello , {userStore.currentUser.attributes.username}<br /></> : <Alert message="登录后可保存上传记录" type="warning" showIcon />
+        userStore.currentUser ? <>Hello , {userStore.currentUser.attributes.username}<br /></> : <Alert message="请登录后再上传文件" type="warning" showIcon />
       }
       <br />
       <Uploader />

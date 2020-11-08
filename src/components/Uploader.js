@@ -4,7 +4,6 @@ import { observer } from 'mobx-react'
 import { Upload, message, Spin, Typography, Button } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import styled from 'styled-components'
-var FileSaver = require('file-saver');
 
 const { Dragger } = Upload;
 const { Text } = Typography;
@@ -17,12 +16,16 @@ background:#fafafa
 `
 
 const Component = observer(() => {
-  const { fileStore } = useStores()
+  const { fileStore,userStore } = useStores()
 
   const props = {
     //手动上传
     beforeUpload: (file) => {
-      window.file = file
+      // window.file = file
+      if(!userStore.currentUser){
+        message.error('未登录');
+        return false
+      }
       if (file.size > 10485760) {
         message.error('上传文件不能大于10M！');
         return false
@@ -43,6 +46,7 @@ const Component = observer(() => {
     showUploadList: false
   }
   const download=()=>{
+    const FileSaver = require('file-saver');
     FileSaver.saveAs(fileStore.serverFile.attributes.url.attributes.url, fileStore.filename);
   }
 
