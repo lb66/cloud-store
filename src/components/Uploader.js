@@ -57,8 +57,8 @@ const Component = observer(() => {
           <p className="ant-upload-drag-icon">
             <InboxOutlined />
           </p>
-          <p className="ant-upload-text">点击选择文件 / 将图文件拖入此虚线框</p>
-          <p className="ant-upload-hint">支持xxx格式</p>
+          <p className="ant-upload-text">点击选择文件 / 将文件拖入此虚线框</p>
+          <p className="ant-upload-hint">支持上传小于 10 MB 的文件</p>
         </Dragger>
       </Spin>
       <div>
