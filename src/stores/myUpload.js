@@ -24,6 +24,10 @@ class MyUploadStore {
       })
   }
 
+  @action delete(id){
+    Uploader.delete(id)
+  }
+
   @action unmount() {
     this.list = []
     this.isLoading = false

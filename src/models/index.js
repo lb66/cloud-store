@@ -50,8 +50,8 @@ const Uploader = {
       query.find().then(result => resolve(result), error => reject(error))
     })
   },
-  delete(objectId) {
-    const item = AV.Object.createWithoutData('Files', objectId);
+  delete(id) {
+    const item = AV.Object.createWithoutData('Files', id);
     item.destroy();
   }
 }
